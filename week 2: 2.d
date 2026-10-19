@@ -1,0 +1,34 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+
+int compare(const void* a, const void* b) {
+    long long int arg1 = *(const long long int*)a;
+    long long int arg2 = *(const long long int*)b;
+    if (arg1 < arg2) return -1;
+    if (arg1 > arg2) return 1;
+    return 0;
+}
+
+int main() {
+    int n;
+    if (scanf("%d", &n) != 1 || n <= 0) return 0;
+    
+    long long* arr = (long long*)malloc(n * sizeof(long long));
+    for (int i = 0; i < n; i++) {
+        scanf("%lld", &arr[i]);
+    }
+    
+    qsort(arr, n, sizeof(long long), compare);
+    
+    
+    long long max_sum = 0;
+    for (int i = 0; i < n; i++) {
+        max_sum += arr[i] * i;
+    }
+    
+    printf("%lld\n", max_sum);
+    
+    free(arr);
+    return 0;
+}
